@@ -34,16 +34,12 @@ Torgersen). It contains 344 observations and 8 variables. The mean
 flipper length is 200.915 mm.
 
 ``` r
-penguins %>% 
-  drop_na() %>% 
+penguins %>% drop_na() %>% 
 ggplot(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) +
 geom_point()
 ```
 
 ![](HW_1_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
-The scatterplot excludes two observations with missing bill or flipper
-length.
 
 Export scatter plot
 
