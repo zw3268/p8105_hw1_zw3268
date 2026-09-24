@@ -1,0 +1,29 @@
+---
+title: "P8105_HW1_zw3268"
+author: "Zeheng Wei"
+date: "2026-09-24"
+output: github_document
+---
+```{r}
+library(tidyverse)
+```
+## Problem_1 
+
+Importing the dataset 
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+The `penguins` dataset includes information about penguins’ species, island, sex, and year, along with measurements of bill length, bill depth, flipper length, and body mass. It contains `r nrow(penguins)` observations and `r ncol(penguins)` variables. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE) %>% round(3)` mm.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
