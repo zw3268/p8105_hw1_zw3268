@@ -48,3 +48,92 @@ ggsave("penguin_plot.jpg")
 ```
 
     ## Saving 7 x 5 in image
+
+## Problem_2
+
+Creating the data frame:
+
+- a random sample of size 10 from a standard Normal distribution
+- a logical vector indicating whether elements of the sample are greater
+  than 0
+- a character vector of length 10
+- a factor vector of length 10, with 3 different factor “levels”
+
+``` r
+df = tibble(random_sample = rnorm(10), 
+            logical_vector = random_sample > 0, 
+            character = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+            factor = factor(c("A", "B", "C", "A", "B", "C", "A", "B", "C", "A"))
+)
+df
+```
+
+    ## # A tibble: 10 × 4
+    ##    random_sample logical_vector character factor
+    ##            <dbl> <lgl>          <chr>     <fct> 
+    ##  1        1.55   TRUE           a         A     
+    ##  2       -0.0939 FALSE          b         B     
+    ##  3       -0.739  FALSE          c         C     
+    ##  4        0.444  TRUE           d         A     
+    ##  5        0.219  TRUE           e         B     
+    ##  6       -1.18   FALSE          f         C     
+    ##  7       -0.345  FALSE          g         A     
+    ##  8        1.12   TRUE           h         B     
+    ##  9       -0.0198 FALSE          i         C     
+    ## 10       -0.166  FALSE          j         A
+
+Taking the mean of each vector
+
+``` r
+mean(pull(df, random_sample))
+```
+
+    ## [1] 0.07917815
+
+``` r
+mean(pull(df, logical_vector))
+```
+
+    ## [1] 0.4
+
+``` r
+mean(pull(df, character))
+```
+
+    ## Warning in mean.default(pull(df, character)): argument is not numeric or
+    ## logical: returning NA
+
+    ## [1] NA
+
+``` r
+mean(pull(df, factor))
+```
+
+    ## Warning in mean.default(pull(df, factor)): argument is not numeric or logical:
+    ## returning NA
+
+    ## [1] NA
+
+The mean can be calculated for the numeric and logical vectors. For the
+logical vector, TRUE is treated as 1 and FALSE as 0, so its mean
+represents the proportion of sampled values greater than zero. The
+character and factor vectors return NA with warnings because they are
+neither numeric nor logical.
+
+Applying as.numeric() to the logical vector converts TRUE to 1 and FALSE
+to 0, explaining why its mean equals the proportion of sampled values
+greater than zero.
+
+``` r
+as.numeric(pull(df, logical_vector))
+as.numeric(pull(df, character))
+as.numeric(pull(df, factor))
+```
+
+The character vector contains letters that cannot be interpreted as
+numbers, so conversion produces NA values and a warning. The factor
+vector is converted to its internal level codes: 1 for A, 2 for B, and 3
+for C. These codes represent categories rather than meaningful
+quantities. Although factors have underlying numeric codes, mean() does
+not directly accept factor or character vectors, so their means return
+NA with warnings.
